@@ -9,7 +9,7 @@ export const WrapperMenu = styled.div`
 
   padding-bottom: 20px;
 
-  border-bottom: 2px solid #6d6d6d;
+  border-bottom: 2px solid #757575;
 `;
 
 export const LogoContainer = styled.div`
