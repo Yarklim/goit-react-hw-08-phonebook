@@ -40,7 +40,7 @@ const UserRegister = () => {
     dispatch(registerOperation(newUser)).then(response => {
       if (response.error) {
         toast.error('Please enter valid data!');
-        navigate('/registration');
+        navigate('/');
       } else {
         navigate('/contacts');
       }

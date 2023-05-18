@@ -1,19 +1,36 @@
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
-import { BtnLogout, LogoContainer, UserName, WrapperMenu } from './UserMenu.styled';
 import stringAvatar from 'utils/avatarFn';
+import { selectUser } from 'redux/Auth/authSlectors';
+import { logoutOperation } from 'redux/Auth/authOperations';
+import {
+  BtnLogout,
+  LogoContainer,
+  UserName,
+  WrapperMenu,
+} from './UserMenu.styled';
 
 const UserMenu = () => {
+  const userName = useSelector(selectUser) || '';
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    dispatch(logoutOperation());
+    navigate('/');
+  };
+
   return (
     <WrapperMenu>
       <LogoContainer>
-        <Avatar
-          {...stringAvatar('Yar Klim')}
-          sx={{ bgcolor: deepPurple[500] }}
-        />
-        <UserName>Kent Dodds</UserName>
+        <Avatar {...stringAvatar(userName)} sx={{ bgcolor: deepPurple[500] }} />
+        <UserName>{userName}</UserName>
       </LogoContainer>
-      <BtnLogout type="button">Logout</BtnLogout>
+      <BtnLogout type="button" onClick={() => logoutUser()}>
+        Logout
+      </BtnLogout>
     </WrapperMenu>
   );
 };

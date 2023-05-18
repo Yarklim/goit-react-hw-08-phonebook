@@ -7,9 +7,11 @@ import UserRegister from 'pages/Auth/UserRegister';
 import UserLogin from 'pages/Auth/UserLogin';
 
 export const App = () => {
-  const isAuth = useSelector(selectIsAuth);
+	const isAuth = useSelector(selectIsAuth);
+	console.log(isAuth)
   return (
-    <>
+	  <>
+
       {isAuth ? (
         <Routes>
           <Route path="/contacts" element={<Phonebook />} />

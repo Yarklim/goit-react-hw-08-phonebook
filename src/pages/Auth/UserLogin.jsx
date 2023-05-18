@@ -33,7 +33,7 @@ const UserLogin = () => {
     dispatch(loginOperation(data)).then(response => {
       if (response.error) {
         toast.error('Please enter valid data!');
-        navigate('/registration');
+        navigate('/');
       } else {
         navigate('/contacts');
       }
