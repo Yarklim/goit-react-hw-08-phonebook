@@ -15,7 +15,7 @@ export const AuthWrapper = styled.div`
 
   width: 500px;
 
-  padding: 20px 40px;
+  padding: 0 40px;
 
   font-size: 18px;
   color: #d4d4d4;
@@ -34,7 +34,7 @@ export const NavWrapper = styled.nav`
 	gap: 30px;
 
 	margin-bottom: 30px;
-	padding-bottom: 20px;
+	padding: 20px;
 
 	border-bottom: 2px solid #ffffff88;
 `

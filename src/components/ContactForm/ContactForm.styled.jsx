@@ -6,9 +6,10 @@ export const Form = styled.form`
 `;
 
 export const InputStyled = styled.input`
-	margin-bottom: 20px;
-	padding: 5px;
-`
+  margin-top: 5px;
+  margin-bottom: 20px;
+  padding: 5px;
+`;
 
 export const Button = styled.button`
   padding: 5px 20px;
@@ -25,7 +26,7 @@ export const Button = styled.button`
 
   &:active {
     transform: scale(0.95);
-	box-shadow: 2px 2px 8px #4a4a4a;
+    box-shadow: 2px 2px 8px #4a4a4a;
   }
   &:hover,
   &:focus {

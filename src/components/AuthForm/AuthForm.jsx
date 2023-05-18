@@ -6,52 +6,35 @@ import {
   InputStyled,
 } from 'components/ContactForm/ContactForm.styled';
 
-const AuthForm = ({ onSubmit, submitTitle }) => {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+const AuthForm = ({ onSubmit, submitTitle, options, initialState }) => {
+  const [form, setForm] = useState(initialState);
 
   const handleChange = e => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-  };
+	};
+	
 
   const handleSubmit = e => {
     e.preventDefault();
     onSubmit(form);
+    setForm(initialState);
   };
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h3>Name</h3>
-      <InputStyled
-        type="text"
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-        placeholder="Enter name..."
-        required
-      />
-      <h3>Email</h3>
-      <InputStyled
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Enter email..."
-        required
-      />
-      <h3>Password</h3>
-      <InputStyled
-        type="password"
-        name="password"
-        value={form.password}
-        onChange={handleChange}
-        placeholder="Enter password..."
-        required
-      />
+      {options.map(el => (
+        <label key={el.name}>
+          <h3>{el.label}</h3>
+          <InputStyled
+            type={el.type}
+            name={el.name}
+            value={form[el.name]}
+            onChange={handleChange}
+            placeholder={el.palceholder}
+          />
+        </label>
+      ))}
       <Button type="submit">{submitTitle}</Button>
     </Form>
   );
@@ -60,6 +43,8 @@ const AuthForm = ({ onSubmit, submitTitle }) => {
 export default AuthForm;
 
 AuthForm.propTypes = {
-	onSubmit: PropTypes.func,
-	submitTitle: PropTypes.string
-}
+  onSubmit: PropTypes.func,
+  submitTitle: PropTypes.string,
+  initialState: PropTypes.object,
+  options: PropTypes.array,
+};
