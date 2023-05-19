@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar } from '@mui/material';
 import { deepPurple } from '@mui/material/colors';
@@ -15,11 +14,9 @@ import {
 const UserMenu = () => {
   const userName = useSelector(selectUser) || '';
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const logoutUser = () => {
     dispatch(logoutOperation());
-    navigate('/');
   };
 
   return (

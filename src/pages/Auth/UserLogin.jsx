@@ -3,7 +3,6 @@ import AuthForm from 'components/AuthForm/AuthForm';
 import { loginOperation } from 'redux/Auth/authOperations';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
 
 const optionsLoginForm = [
   {
@@ -27,15 +26,11 @@ const initialStateLoginForm = {
 
 const UserLogin = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLoginUser = data => {
     dispatch(loginOperation(data)).then(response => {
       if (response.error) {
-        toast.error('Please enter valid data!');
-        navigate('/');
-      } else {
-        navigate('/contacts');
+        toast.error('Incorrect email or password!');
       }
     });
   };
@@ -49,7 +44,7 @@ const UserLogin = () => {
         options={optionsLoginForm}
         initialState={initialStateLoginForm}
       />
-      <ToastContainer autoClose={3500} theme="colored" />
+      <ToastContainer position="top-center" autoClose={2000} theme="colored" />
     </>
   );
 };

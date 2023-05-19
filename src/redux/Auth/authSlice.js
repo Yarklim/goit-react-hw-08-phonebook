@@ -69,12 +69,11 @@ const authSlice = createSlice({
       })
       .addCase(refreshOperation.fulfilled, (state, { payload }) => {
         return {
+          ...state,
           isAuth: true,
           isLoading: false,
-          user: payload.user,
-          token: payload.token,
+          user: payload,
           isRefreshing: false,
-          error: null,
         };
       })
       .addCase(refreshOperation.rejected, (state, { payload }) => {

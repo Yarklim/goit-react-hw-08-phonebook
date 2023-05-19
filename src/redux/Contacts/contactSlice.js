@@ -1,16 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addContacts, deleteContacts, getContacts } from './contactsOperations';
+import { logoutOperation } from 'redux/Auth/authOperations';
+
+const initialState = {
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  filter: '',
+};
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: {
-    contacts: {
-      items: [],
-      isLoading: false,
-      error: null,
-    },
-    filter: '',
-  },
+  initialState,
+
   reducers: {
     filterContact: {
       reducer(state, { payload }) {
@@ -36,6 +40,9 @@ const contactsSlice = createSlice({
           contact => contact.id === payload
         );
         state.contacts.items.splice(contactIndex, 1);
+      })
+      .addCase(logoutOperation.fulfilled, () => {
+        return { ...initialState };
       })
       .addMatcher(
         action => action.type.endsWith('/pending'),

@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,15 +33,11 @@ const initialStateRegisterForm = {
 
 const UserRegister = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleRegisterUser = newUser => {
     dispatch(registerOperation(newUser)).then(response => {
       if (response.error) {
         toast.error('Please enter valid data!');
-        navigate('/');
-      } else {
-        navigate('/contacts');
       }
     });
   };
@@ -55,7 +50,7 @@ const UserRegister = () => {
         options={optionsRegisterForm}
         initialState={initialStateRegisterForm}
       />
-      <ToastContainer autoClose={3500} theme="colored" />
+      <ToastContainer position="top-center" autoClose={2000} theme="colored" />
     </>
   );
 };
