@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getContacts } from 'redux/Contacts/contactsOperations';
+import React, { useState } from 'react';
 import Loader from 'components/Loader/Loader';
 import UserMenu from 'components/UserMenu/UserMenu';
 import { ContactForm } from 'components/ContactForm';
@@ -11,16 +9,12 @@ import { Modal } from 'components/Modal';
 import { Container } from 'components/App.styled';
 
 const Phonebook = () => {
-  const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
     setShowModal(showModal => !showModal);
   };
 
-  useEffect(() => {
-    dispatch(getContacts());
-  }, [dispatch]);
 
   return (
     <Container>

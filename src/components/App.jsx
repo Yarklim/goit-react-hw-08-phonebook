@@ -8,17 +8,20 @@ import UserLogin from 'pages/Auth/UserLogin';
 import RestrictedRoute from './RestrictedRoute';
 import PrivateRoute from './PrivateRoute';
 import { useSelector } from 'react-redux';
-import { selectIsAuth } from 'redux/Auth/authSlectors';
+import { selectAuthToken, selectIsAuth } from 'redux/Auth/authSlectors';
 import { refreshOperation } from 'redux/Auth/authOperations';
 import { getContacts } from 'redux/Contacts/contactsOperations';
 
 export const App = () => {
   const isAuth = useSelector(selectIsAuth);
+  const isToken = useSelector(selectAuthToken);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshOperation()).then(() => dispatch(getContacts()));
-  }, [dispatch]);
+    if (isToken) {
+      dispatch(refreshOperation()).then(() => dispatch(getContacts()));
+    }
+  }, [isToken, dispatch]);
 
   return (
     <>
