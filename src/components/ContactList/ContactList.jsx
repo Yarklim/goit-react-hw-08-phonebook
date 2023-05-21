@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContacts, getContacts } from 'redux/Contacts/contactsOperations';
+import { deleteContacts } from 'redux/Contacts/contactsOperations';
 import { selectorContacts, selectorFilter } from 'redux/Contacts/selectors';
-import { refreshOperation } from 'redux/Auth/authOperations';
+// import { refreshOperation } from 'redux/Auth/authOperations';
 import { List, Item, BtnDelete } from './ContactList.styled';
 
 export const ContactList = () => {
@@ -20,10 +19,6 @@ export const ContactList = () => {
   };
 
   const filteredContacts = handleFilter();
-
-  useEffect(() => {
-      dispatch(refreshOperation()).then(() => dispatch(getContacts()));
-  }, [dispatch]);
 
   return (
     <List>
