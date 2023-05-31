@@ -2,19 +2,20 @@ import { useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Phonebook from 'pages/Phonebook/Phonebook';
-import Authorization from 'pages/Auth/Authorization';
 import UserRegister from 'pages/Auth/UserRegister';
 import UserLogin from 'pages/Auth/UserLogin';
 import RestrictedRoute from './RestrictedRoute';
 import PrivateRoute from './PrivateRoute';
 import { useSelector } from 'react-redux';
-import { selectAuthToken, selectIsAuth } from 'redux/Auth/authSlectors';
+import { selectAuthToken, selectIsAuth, selectIsRefreshing } from 'redux/Auth/authSlectors';
 import { refreshOperation } from 'redux/Auth/authOperations';
 import { getContacts } from 'redux/Contacts/contactsOperations';
+import Authorization from 'pages/Auth/Authorization';
 
 export const App = () => {
   const isAuth = useSelector(selectIsAuth);
-  const isToken = useSelector(selectAuthToken);
+	const isToken = useSelector(selectAuthToken);
+	const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ export const App = () => {
   }, [isToken, dispatch]);
 
   return (
-    <>
+    !isRefreshing && (<>
       <Routes>
         <Route path="/" element={<Authorization />}>
           <Route
@@ -52,6 +53,6 @@ export const App = () => {
           element={!isAuth ? <Navigate to="/" /> : <Navigate to="/contacts" />}
         />
       </Routes>
-    </>
+    </>)
   );
 };
